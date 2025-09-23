@@ -1,62 +1,48 @@
-# devspaces-contract-demo
+# Dev Spaces Demo for real world applications
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This Dev Spaces Demo demonstrates how to develop an application which has different dependencies while developing it locally. 
+Of course - as application developers - we would like to have isolated microservices which are designed to be developed without any related infrastructure. 
+The goal is to write unit tests, integration tests and e2e tests so you don't need any additional components deployed to just develop the simple microservice on your local machine. 
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+But in reality we see a lot of legacy applications with dependencies to different components. And often it's not possible to test one component locally without having other components available. This is the reason why I created this demo to show that it's possible to solve this scenario in OpenShift Dev Spaces as well. 
 
-## Running the application in dev mode
+So you are able to develop your application fully containerized in a standardized and secure environment. 
+And this is a very good first step to modernize the application and decouple components for the future. 
 
-You can run your application in dev mode that enables live coding using:
+## Demo Application's Architecture
 
-```shell script
-./mvnw quarkus:dev
 ```
-
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+ external component outside        │     The component              │       Components I want  
+ my devspaces namespace                I want to work on                    to start during    
+                                   │                                │       local development  
+─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─
+                                   │                                │                          
+                                                                                               
+   ┌────────────────┐              │                                │                          
+   │Customer Backend│                               persist new contract    ┌─────────────────┐
+   │ -external API- │              │          ┌─────────────────────│───────┤Contract Database│
+   └───────┬────────┘                         │                             └─────────────────┘
+           │                       │          │                     │                          
+           │                                  │                                                
+           │   ask if customer     │ ┌────────┴───────┐             │                          
+           └─────────────────────────┤Contract Backend│                                        
+               already exists      │ └────────┬───────┘             │                          
+                                              │                                                
+                                   │          │                     │                          
+                                              │                                                
+                                   │          │                     │                          
+                                              │                            ┌────────────────┐  
+                                   │          │                     │      │Kafka           │  
+                                              └────────────────────────────┤                │  
+                                   │             consume new        │      │Topic: Contracts│  
+                                                 contract event            └───────┬────────┘  
+                                   │                                │              │           
+                                                                                   │           
+                                   │                                │              │produce    
+                                                                                   │new        
+                                   │                                │              │contract   
+                                                                                   │           
+                                   │                                │     ┌────────┴────────┐  
+                                                                          │Customer Frontend│  
+                                   │                                │     └─────────────────┘  
 ```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/devspaces-contract-demo-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
