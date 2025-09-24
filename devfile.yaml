@@ -30,6 +30,12 @@ components:
     volume:
       size: 1G
 commands:
+  - id: 0-install-dependencies
+    exec:
+      label: "0. Install Dependencies Helm Chart"
+      component: tools
+      workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo
+      commandLine: "helm upgrade dependencies dependencies --install"
   - id: 1-package
     exec:
       label: "1. Package the application"
@@ -46,14 +52,5 @@ commands:
       workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo
       commandLine: "mvn compile quarkus:dev"
       group:
-        kind: run
-        isDefault: true
-  - id: 3-startdependencies
-    exec:
-      label: "3. Start Dependencies for local development"
-      component: tools
-      workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo/dependencies
-      commandLine: helm apply ...
-      group: 
         kind: run
         isDefault: true
