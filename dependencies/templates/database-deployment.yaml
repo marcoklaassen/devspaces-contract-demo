@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      containers:
+        - name: postgresql
+          image: registry.redhat.io/rhel10/postgresql-16
+          env:
+            - name: POSTGRESQL_USER
+              value: "developer"
+            - name: POSTGRESQL_PASSWORD
+              value: "developer"
+            - name: POSTGRESQL_DATABASE
+              value: "contracts"
+          ports:
+            - containerPort: 5432
