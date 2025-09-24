@@ -34,7 +34,7 @@ commands:
     exec:
       label: "1. Package the application"
       component: tools
-      workingDir: ${PROJECTS_ROOT}
+      workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo
       commandLine: "mvn package"
       group:
         kind: build
@@ -43,7 +43,7 @@ commands:
     exec:
       label: "2. Start Development mode (Hot reload + debug)"
       component: tools
-      workingDir: ${PROJECTS_ROOT}
+      workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo
       commandLine: "mvn compile quarkus:dev"
       group:
         kind: run
@@ -52,7 +52,7 @@ commands:
     exec:
       label: "3. Start Dependencies for local development"
       component: tools
-      workingDir: ${PROJECTS_ROOT}
+      workingDir: ${PROJECTS_ROOT}/devspaces-contract-demo/dependencies
       commandLine: helm apply ...
       group: 
         kind: run
