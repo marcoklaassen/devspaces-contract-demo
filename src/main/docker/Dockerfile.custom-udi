@@ -1,0 +1,5 @@
+FROM registry.redhat.io/devspaces/udi-rhel9
+
+RUN rm -rf ~/.java/current/ \
+    && mkdir -p ~/.java/current/ \
+    && ln -s /usr/lib/jvm/java-21-openjdk/* ~/.java/current
