@@ -17,7 +17,7 @@ components:
           name: hello-greeting
           protocol: https
           targetPort: 8080
-          path: /hello
+          path: /contract
       volumeMounts:
         - name: m2
           path: /home/user/.m2
