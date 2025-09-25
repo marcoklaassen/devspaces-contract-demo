@@ -29,7 +29,7 @@ spec:
         - name: IMAGE
           value: 'quay.io/mklaasse/udi-rhel9:jdk21'
         - name: DOCKERFILE
-          value: ./src/main/docker/Dockerfile.custom-udi
+          value: ./devspaces-customization/universal-developer-image/Dockerfile.custom-udi
         - name: CONTEXT
           value: .
       runAfter:
