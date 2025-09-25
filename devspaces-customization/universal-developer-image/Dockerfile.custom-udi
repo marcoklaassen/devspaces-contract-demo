@@ -1,5 +1,7 @@
 FROM registry.redhat.io/devspaces/udi-rhel9
 
+USER root
+
 RUN rm -rf ~/.java/current/ \
     && mkdir -p ~/.java/current/ \
     && ln -s /usr/lib/jvm/java-21-openjdk/* ~/.java/current
@@ -16,5 +18,7 @@ RUN curl -LsO https://github.com/quarkusio/quarkus/releases/download/${QUARKUS_V
     unzip -q quarkus-cli-${QUARKUS_VERSION}.zip -d /usr/local && \
     mv /usr/local/quarkus-${QUARKUS_VERSION} "${QUARKUS_HOME}" && \
     rm quarkus-cli-${QUARKUS_VERSION}.
-    
+
+USER 1001
+
 RUN quarkus --version
