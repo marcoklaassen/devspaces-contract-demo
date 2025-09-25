@@ -11,13 +11,10 @@ ARG QUARKUS_VERSION=3.28.1
 ENV QUARKUS_HOME="/usr/local/quarkus"
 ENV PATH="${QUARKUS_HOME}/bin:${PATH}"
 
-RUN dnf install -y unzip curl && \
-    dnf clean all
-
 RUN curl -LsO https://github.com/quarkusio/quarkus/releases/download/${QUARKUS_VERSION}/quarkus-cli-${QUARKUS_VERSION}.zip && \
     unzip -q quarkus-cli-${QUARKUS_VERSION}.zip -d /usr/local && \
-    mv /usr/local/quarkus-${QUARKUS_VERSION} "${QUARKUS_HOME}" && \
-    rm quarkus-cli-${QUARKUS_VERSION}.
+    mv /usr/local/quarkus-cli-${QUARKUS_VERSION} "${QUARKUS_HOME}" && \
+    rm quarkus-cli-${QUARKUS_VERSION}.zip
 
 USER 1001
 
