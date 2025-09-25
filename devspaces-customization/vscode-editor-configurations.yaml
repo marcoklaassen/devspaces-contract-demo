@@ -8,12 +8,20 @@ data:
   extensions.json: |
     {
       "recommendations": [
-      "mtxr.sqltools",
-      "mtxr.sqltools-driver-pg",
+          "dbaeumer.vscode-eslint",
+          "github.vscode-pull-request-github",
+          "mtxr.sqltools",
+          "mtxr.sqltools-driver-pg"
       ]
     }
   settings.json: |
     {
+      "window.header": "Klaassen.Click DevSpaces Demo",
+      "window.commandCenter": false,
+      "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#DC143C",
+        "titleBar.activeForeground": "#ffffff"
+      },
       "sqltools.connections": [
         {
         "ssh": "Disabled",
@@ -29,6 +37,15 @@ data:
       ]
     }
   product.json: |
-    {}
+    {
+      "extensionEnabledApiProposals": {
+        
+      },
+      "trustedExtensionAuthAccess": [
+        
+      ]
+    }
   configurations.json: |
-    {}
+    {
+      "extensions.install-from-vsix-enabled": false
+    }
