@@ -1,15 +1,1 @@
-{
-    "sqltools.connections": [
-        {
-        "ssh": "Disabled",
-        "previewLimit": 50,
-        "server": "postgresql-service",
-        "port": 5432,
-        "driver": "PostgreSQL",
-        "name": " postgresql-service",
-        "database": "contracts",
-        "username": "developer",
-        "password": "developer"
-        }
-    ]
-}
+{}
